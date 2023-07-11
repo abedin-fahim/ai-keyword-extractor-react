@@ -1,6 +1,12 @@
 import { Container, Box } from '@chakra-ui/react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import TextInput from './components/TextInput';
 
 function App() {
+  const extractKeyword = (text) => {
+    console.log(text);
+  };
   return (
     <Box
       bg='blue.600'
@@ -12,7 +18,9 @@ function App() {
         maxW='3xl'
         centerContent
       >
-        <h1>My app</h1>
+        <Header />
+        <TextInput extractKeyword={extractKeyword} />
+        <Footer />
       </Container>
     </Box>
   );
