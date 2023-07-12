@@ -11,6 +11,17 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  let API_KEY;
+  let API_URL;
+
+  if (import.meta.ENVIRONMENT === 'Production') {
+    API_KEY = process.env.OPENAI_API_KEY;
+    API_URL = process.env.OPENAI_API_URL;
+  } else {
+    API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+    API_URL = import.meta.env.VITE_OPENAI_API_URL;
+  }
+
   const extractKeyword = async (text) => {
     setLoading(true);
     setIsOpen(true);
@@ -19,7 +30,7 @@ function App() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
         model: 'text-davinci-003',
@@ -35,7 +46,7 @@ function App() {
       }),
     };
 
-    const response = await fetch(import.meta.env.VITE_OPENAI_API_URL, options);
+    const response = await fetch(API_URL, options);
     const json = await response.json();
 
     const data = json.choices[0].text.trim();
