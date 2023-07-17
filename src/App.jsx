@@ -14,13 +14,13 @@ function App() {
   let API_KEY;
   let API_URL;
 
-  if (import.meta.ENVIRONMENT === 'Production') {
-    API_KEY = process.env.OPENAI_API_KEY;
-    API_URL = process.env.OPENAI_API_URL;
-  } else {
-    API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-    API_URL = import.meta.env.VITE_OPENAI_API_URL;
-  }
+  // Production
+  API_KEY = process.env.VITE_OPENAI_API_KEY;
+  API_URL = process.env.VITE_OPENAI_API_URL;
+
+  // Development
+  // API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+  // API_URL = import.meta.env.VITE_OPENAI_API_URL;
 
   const extractKeyword = async (text) => {
     setLoading(true);
